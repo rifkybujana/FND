@@ -1,2 +1,1 @@
-# FND
- FND(Fake News Detection) AI
+# FND (Fake News Detection AI)
