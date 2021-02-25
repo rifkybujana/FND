@@ -171,15 +171,6 @@ Project Link: [https://github.com/rifkybujana/FND](https://github.com/rifkybujan
 
 
 
-<!-- ACKNOWLEDGEMENTS -->
-## Acknowledgements
-
-* []()
-* []()
-* []()
-
-
-
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
