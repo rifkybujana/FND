@@ -59,7 +59,9 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-
+![screenshot](https://i.imgur.com/tp7hOov.png)
+FND is an web application that can be used to predict whether a news is hoax or not. This app support 2 language, which is english and indonesian language.
+the english logistic regression model have been trained with 5000 hoax news and valid news data from [kaggle](https://www.kaggle.com/c/fake-news/data) that give 93%-95% accuracy from the testing dataset. But the indonesian model is just trained with 600 hoax news dataset by [Faisal Rahutomo, Inggrid Yanuar, Rosa Andrie Asmara](https://data.mendeley.com/datasets/p3hfgr5j3m/1) that give us 75% accuracy from the testing dataset.
 
 
 
@@ -127,11 +129,6 @@ Install all the library used in this project
 
 
 
-<!-- USAGE EXAMPLES -->
-## Usage
-
-
-
 
 
 <!-- ROADMAP -->
@@ -168,6 +165,10 @@ Distributed under the MIT License. See `LICENSE` for more information.
 * Aikyo Dzaki Aroef - [@aikibot](https://www.instagram.com/aikibot/) - aikyodzakiaroef@gmail.com
 
 Project Link: [https://github.com/rifkybujana/FND](https://github.com/rifkybujana/FND)
+
+
+
+## Acknowledgements
 
 
 
