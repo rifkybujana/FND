@@ -22,7 +22,6 @@ st.sidebar.write("""
 ### Settings
 """)
 
-model = st.sidebar.selectbox('Model', ['Logistic Regression','Naive Bayse','Recurrent Neural Networks'])
 language = st.sidebar.selectbox('language', ['english', 'indonesian'])
 
 #############################################################################################
@@ -48,13 +47,13 @@ submit = submit_button.button("Enter")
 ######################################   MODEL  #############################################
 #############################################################################################
 
-id_model = pickle.load(open('indo_model.pkl', 'rb'))
-en_model = pickle.load(open('eng_model.pkl', 'rb'))
+id_model = pickle.load(open('Data/indo_model.pkl', 'rb'))
+en_model = pickle.load(open('Data/eng_model.pkl', 'rb'))
 
-id_vocab = pd.read_csv('indo_vocab.csv', header=None).values
+id_vocab = pd.read_csv('Data/indo_vocab.csv', header=None).values
 id_vocab = id_vocab.reshape(len(id_vocab)).tolist()
 
-en_vocab = pd.read_csv('eng_vocab.csv', header=None).values
+en_vocab = pd.read_csv('Data/eng_vocab.csv', header=None).values
 en_vocab = en_vocab.reshape(len(en_vocab)).tolist()
 
 stopwords = set(stopwords.words(language))
