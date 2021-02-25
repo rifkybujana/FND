@@ -221,7 +221,7 @@ Project Link: [https://github.com/rifkybujana/FND](https://github.com/rifkybujan
 [stars-url]: https://github.com/rifkybujana/FND/stargazers
 [issues-shield]: https://img.shields.io/github/issues/rifkybujana/FND.svg?style=for-the-badge
 [issues-url]: https://github.com/rifkybujana/FND/issues
-[license-shield]: 
+[license-shield]: https://img.shields.io/github/license/rifkybujana/FND.svg?style=for-the-badge
 [license-url]: https://github.com/rifkybujana/FND/blob/main/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/rifkybujana
