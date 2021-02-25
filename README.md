@@ -225,5 +225,3 @@ Project Link: [https://github.com/rifkybujana/FND](https://github.com/rifkybujan
 [license-url]: ./LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/rifkybujana
-
-[MIT](./LICENSE)
