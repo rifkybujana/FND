@@ -148,9 +148,9 @@ Install all the library used in this project
    ```sh
    git clone https://github.com/rifkybujana/FND.git
    ```
-2. Install NPM packages
+2. Run this webapp in your localhost by simply:
    ```sh
-   npm install
+   streamlit run app.py
    ```
 
 
