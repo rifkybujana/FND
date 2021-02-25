@@ -164,8 +164,8 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Rifky Bujana Bisri - [@rifkybujanabisri](https://www.instagram.com/rifkybujanabisri/) - rifkybujanabisri@gmail.com
-Aikyo Dzaki Aroef - [@aikibot](https://www.instagram.com/aikibot/) - aikyodzakiaroef@gmail.com
+* Rifky Bujana Bisri - [@rifkybujanabisri](https://www.instagram.com/rifkybujanabisri/) - rifkybujanabisri@gmail.com
+* Aikyo Dzaki Aroef - [@aikibot](https://www.instagram.com/aikibot/) - aikyodzakiaroef@gmail.com
 
 Project Link: [https://github.com/rifkybujana/FND](https://github.com/rifkybujana/FND)
 
