@@ -20,9 +20,6 @@
   <p align="center">
     Fake News Detection AI
     <br />
-    <a href="https://github.com/rifkybujana/FND"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
     <a href="https://github.com/rifkybujana/FND/issues">Report Bug</a>
     ·
     <a href="https://github.com/rifkybujana/FND/issues">Request Feature</a>
