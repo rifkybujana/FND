@@ -37,10 +37,10 @@
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Fake News Detection</h3>
+  <h3 align="center">FND</h3>
 
   <p align="center">
-    project_description
+    Fake News Detection AI
     <br />
     <a href="https://github.com/rifkybujana/FND"><strong>Explore the docs »</strong></a>
     <br />
