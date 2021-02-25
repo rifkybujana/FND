@@ -108,12 +108,40 @@ To get a local copy up and running follow these simple steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
+Install all the library used in this project
+* Streamlit
   ```sh
-  npm install npm@latest -g
+  pip install streamlit
   ```
-
+* Sastrawi
+  ```sh
+  pip install Sastrawi
+  ```
+* NLTK
+  ```sh
+  pip install nltk
+  ```
+  and then you need to install some nltk data by:
+  ```
+  $ python3
+  >>> import nltk
+  >>> nltk.download('stopwords')
+  >>> nltk.download('punkt')
+  >>> nltk.download('wordnet')
+  ```
+* Pandas
+  ```sh
+  pip install pandas
+  ```
+* Joblib
+  ```sh
+  pip install joblib
+  ```
+* Pickle
+  ```sh
+  pip install pickle-mixin
+  ```
+  
 ### Installation
 
 1. Clone the repo
