@@ -65,9 +65,11 @@
 
 ### Built With
 
-* []()
-* []()
-* []()
+* [Streamlit](https://www.streamlit.io/)
+* [Sastrawi](https://sastrawi.github.io/)
+* [NLTK](https://www.nltk.org/)
+* [Pandas](https://pandas.pydata.org/)
+* [Joblib](https://joblib.readthedocs.io/en/latest/)
 
 
 
