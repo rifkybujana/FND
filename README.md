@@ -170,6 +170,8 @@ Project Link: [https://github.com/rifkybujana/FND](https://github.com/rifkybujan
 
 ## Acknowledgements
 
+* [kaggle](https://www.kaggle.com/c/fake-news/data)
+* [Indonesian Hoax News Dataset by Faisal Rahutomo, Inggrid Yanuar, Rosa Andrie Asmara](https://data.mendeley.com/datasets/p3hfgr5j3m/1)
 
 
 
