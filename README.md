@@ -37,7 +37,7 @@
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">project_title</h3>
+  <h3 align="center">Fake News Detection</h3>
 
   <p align="center">
     project_description
@@ -166,7 +166,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@rifky](https://twitter.com/BisriRifky) - email
+Rifky Bujana Bisri - [@BisriRifky](https://twitter.com/BisriRifky) - rifkybujanabisri@gmail.com
 
 Project Link: [https://github.com/rifkybujana/FND](https://github.com/rifkybujana/FND)
 
