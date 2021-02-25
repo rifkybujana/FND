@@ -129,6 +129,14 @@ Install all the library used in this project
 
 
 
+<!-- USAGE -->
+## Usage
+
+To use this app to predict whether a news is real or not, simply just put a text of an article into the textbox, or you can write it in a file without any paragraf (just 1 line). Or you can put a list of article separated by enter (1 line for every article), hit enter and wait until the process is done.
+
+```Note: Dont forget to make sure that you're using the correct language settings in the sidebar```
+
+
 
 
 <!-- ROADMAP -->
