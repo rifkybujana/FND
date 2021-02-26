@@ -10,9 +10,8 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/
-           /FND">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  <a href="https://github.com/rifkybujana/FND">
+    <img src="https://i.imgur.com/RT9Exnu.png" width="180" height="140">
   </a>
 
   <h3 align="center">FND</h3>
