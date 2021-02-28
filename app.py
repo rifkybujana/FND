@@ -13,6 +13,7 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
+from joblib import Parallel, delayed
 
 #############################################################################################
 ###################################### SIDEBAR ##############################################
@@ -44,7 +45,7 @@ submit_button = st.empty()
 submit = submit_button.button("Enter")
 
 #############################################################################################
-######################################   MODEL  #############################################
+##################################### LOAD MODEL  ###########################################
 #############################################################################################
 
 id_model = pickle.load(open('Data/indo_model.pkl', 'rb'))
@@ -80,17 +81,19 @@ def ReadFile(file):
 
 # preprocess the text
 def Preprocess(text):
-    text = ' '.join(re.sub(r'[^\w+ |_]', ' ', text).split()).lower()
+    text = text.lower()
+    text = text.split()
+    text = ' '.join(Parallel(n_jobs=-1)(delayed(re.sub)(r'[^A-Za-z0-9]+', '', w) for w in text))
 
     if language == 'english':
-        text = lemmatizer.lemmatize(text)
+        text = text.split()
+        text = Parallel(n_jobs=-1)(delayed(lemmatizer.lemmatize)(i) for i in text)
     else:
-        text = stemmer.stem(text)
+        text = stemmer.stem(text).split()
 
-    text = re.sub(r'\d+','num', text)
-    text = word_tokenize(text)
-    text = [w for w in text if w not in stopwords and len(w) > 2]
+    text = ' '.join(Parallel(n_jobs=-1)(delayed(re.sub)(r'\d+', ' <num> ', w) for w in text)).split()
     text = list(dict.fromkeys(text))
+    text = [w for w in text if not w in stopwords and len(w) > 2]
 
     return text
 
@@ -115,7 +118,7 @@ def Vectorize(text):
 
     result = [0] * len(vocab)
     for i in text:
-        if i == "num":
+        if i == "<num>":
             result[vocab.index("num")] = 1
         else:
             try:
