@@ -6,7 +6,9 @@ import re
 import base64
 import nltk
 import pickle
+import requests
 
+from bs4 import BeautifulSoup
 from LogisticRegression import LogisticRegressions
 from io import StringIO
 from nltk.tokenize import word_tokenize 
@@ -151,36 +153,52 @@ if submit:
 
         # process text if there's any text written
         if len(text) > 0:
-            data.append(text)
+            if text[:4].lower() == 'http':
+                try:
+                    url = requests.get(text)
+                    soup = BeautifulSoup(url.content, 'html5lib')
 
-    # saving the original data
-    original = data.copy()
+                    article = []
+                    for i in soup.findAll('p'):
+                        article.append(i.text)
 
-    # Preprocess the data
-    Preprocessed_data = ProcessData(data)
+                    article = ' '.join(article)
+                    
+                    data.append(article)
+                except Exception as e:
+                    st.write(e)
+            else:
+                data.append(text)
 
-    # Vectorize the data
-    VectorizedData = np.asarray(VectorizeData(Preprocessed_data))
+    if data:
+        # saving the original data
+        original = data.copy()
 
-    # Reshape Data
-    if len(VectorizedData.shape) < 2:
-        VectorizedData = VectorizedData.reshape(1, len(VectorizedData))
+        # Preprocess the data
+        Preprocessed_data = ProcessData(data)
 
-    # Predict this news is fake or not
-    model = LogisticRegressions()
-    if language == 'english':
-        model = en_model
-    else:
-        model = id_model
-    
-    Prediction = model.predict(VectorizedData)
+        # Vectorize the data
+        VectorizedData = np.asarray(VectorizeData(Preprocessed_data))
 
-    Result = pd.DataFrame({
-        'Text' : original,
-        'Preprocessed Data' : Preprocessed_data,
-        'Prediction' : Prediction
-    })
-    Result['Prediction'] = Result['Prediction'].replace([True, False], ["Hoax", "Valid"])
-    st.dataframe(Result)
+        # Reshape Data
+        if len(VectorizedData.shape) < 2:
+            VectorizedData = VectorizedData.reshape(1, len(VectorizedData))
 
-    st.markdown(GetCSVDownloadLink(Result, "Result.csv"), unsafe_allow_html=True)
+        # Predict this news is fake or not
+        model = LogisticRegressions()
+        if language == 'english':
+            model = en_model
+        else:
+            model = id_model
+        
+        Prediction = model.predict(VectorizedData)
+
+        Result = pd.DataFrame({
+            'Text' : original,
+            'Preprocessed Data' : Preprocessed_data,
+            'Prediction' : Prediction
+        })
+        Result['Prediction'] = Result['Prediction'].replace([True, False], ["Hoax", "Valid"])
+        st.dataframe(Result)
+
+        st.markdown(GetCSVDownloadLink(Result, "Result.csv"), unsafe_allow_html=True)
