@@ -164,7 +164,10 @@ if submit:
 
                     article = ' '.join(article)
                     
-                    data.append(article)
+                    if article:
+                        data.append(article)
+                    else:
+                        st.write("""Sorry, we can't scrap this article, please input the full article instead""")
                 except Exception as e:
                     st.write(e)
             else:
