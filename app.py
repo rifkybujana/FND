@@ -10,12 +10,8 @@ import requests
 
 from bs4 import BeautifulSoup
 from LogisticRegression import LogisticRegressions
+from Preprocess import Tokenizer, Encoder
 from io import StringIO
-from nltk.tokenize import word_tokenize 
-from nltk.corpus import stopwords
-from nltk.stem import WordNetLemmatizer
-from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
-from joblib import Parallel, delayed
 
 #############################################################################################
 ###################################### SIDEBAR ##############################################
@@ -50,19 +46,12 @@ submit = submit_button.button("Enter")
 ##################################### LOAD MODEL  ###########################################
 #############################################################################################
 
-id_model = pickle.load(open('Data/indo_model.pkl', 'rb'))
-en_model = pickle.load(open('Data/eng_model.pkl', 'rb'))
+id_model = pickle.load(open('Data/id_logistic.pkl', 'rb'))
+en_model = pickle.load(open('Data/en_logistic.pkl', 'rb'))
 
-id_vocab = pd.read_csv('Data/indo_vocab.csv', header=None).values
-id_vocab = id_vocab.reshape(len(id_vocab)).tolist()
-
-en_vocab = pd.read_csv('Data/eng_vocab.csv', header=None).values
-en_vocab = en_vocab.reshape(len(en_vocab)).tolist()
-
-stopwords = set(stopwords.words(language))
-lemmatizer = WordNetLemmatizer()
-factory = StemmerFactory()
-stemmer = factory.create_stemmer()
+tokenizer = Tokenizer(language)
+id_encoder = pickle.load(open('Data/id_encoder.pkl', 'rb'))
+en_encoder = pickle.load(open('Data/en_encoder.pkl', 'rb'))
 
 #############################################################################################
 ###################################### FUNCTION #############################################
@@ -77,67 +66,39 @@ def GetCSVDownloadLink(data, filename):
 
     return href
 
+
 # read .txt file
 def ReadFile(file):
     return StringIO(file.getvalue().decode("utf-8"))
 
-# preprocess the text
-def Preprocess(text):
-    text = text.lower()
-    text = text.split()
-    text = ' '.join(Parallel(n_jobs=-1)(delayed(re.sub)(r'[^A-Za-z0-9]+', '', w) for w in text))
-
-    if language == 'english':
-        text = text.split()
-        text = Parallel(n_jobs=-1)(delayed(lemmatizer.lemmatize)(i) for i in text)
-    else:
-        text = stemmer.stem(text).split()
-
-    text = ' '.join(Parallel(n_jobs=-1)(delayed(re.sub)(r'\d+', ' <num> ', w) for w in text)).split()
-    text = list(dict.fromkeys(text))
-    text = [w for w in text if not w in stopwords and len(w) > 2]
-
-    return text
 
 # Process all text in file
 def ProcessData(file):
     with st.spinner("Processing Data...."):
         progress = st.progress(0)
         for i in range(len(file)):
-            file[i] = Preprocess(file[i])
+            file[i] = tokenizer.Tokenize(file[i])
             progress.progress((i + 1) / len(file))
 
+        time.sleep(0.5)
         progress.empty()
         return file
 
-# turn text into bow
-def Vectorize(text):
-    vocab = []
-    if language == 'english':
-        vocab = en_vocab
-    else:
-        vocab = id_vocab
-
-    result = [0] * len(vocab)
-    for i in text:
-        if i == "<num>":
-            result[vocab.index("num")] = 1
-        else:
-            try:
-                result[vocab.index(i)] = 1
-            except:
-                result[vocab.index("unk")] = 1
-    
-    return result
 
 # vectorize all text in file
 def VectorizeData(file):
+    if language == 'english':
+        encoder = en_encoder
+    else:
+        encoder = id_encoder
+
     with st.spinner("Vectorizing Data...."):
         progress = st.progress(0)
         for i in range(len(file)):
-            file[i] = Vectorize(file[i])
+            file[i] = encoder.OneHot(file[i])
             progress.progress((i + 1) / len(file))
 
+        time.sleep(0.5)
         progress.empty()
         return file
 
@@ -164,7 +125,8 @@ if submit:
 
                     article = ' '.join(article)
                     
-                    data.append(article)
+                    if article:
+                        data.append(article)
                 except Exception as e:
                     st.write(e)
             else:
@@ -180,19 +142,17 @@ if submit:
         # Vectorize the data
         VectorizedData = np.asarray(VectorizeData(Preprocessed_data))
 
-        # Reshape Data
+        # Reshape Data into 2D shape
         if len(VectorizedData.shape) < 2:
             VectorizedData = VectorizedData.reshape(1, len(VectorizedData))
 
         # Predict this news is fake or not
-        model = LogisticRegressions()
         if language == 'english':
-            model = en_model
+            Prediction = en_model.predict(VectorizedData)
         else:
-            model = id_model
-        
-        Prediction = model.predict(VectorizedData)
+            Prediction = id_model.predict(VectorizedData)
 
+        # Show Prediction
         Result = pd.DataFrame({
             'Text' : original,
             'Preprocessed Data' : Preprocessed_data,
