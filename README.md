@@ -11,7 +11,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/rifkybujana/FND">
-    <img src="https://i.imgur.com/RT9Exnu.png" width="180" height="140">
+    <img src="https://i.imgur.com/Wkx9XUI.png" width="180" height="140">
   </a>
 
   <h3 align="center">FND</h3>
