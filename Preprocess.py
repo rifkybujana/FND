@@ -10,20 +10,19 @@ from joblib import Parallel, delayed
 
 class Tokenizer():
     def __init__(self, language):
-        self.language = language
-        self.stopwords = set(stopwords.words(language))
+        self.language   = language
+        self.stopwords  = set(stopwords.words(language))
         self.lemmatizer = WordNetLemmatizer()
         
-        factory = StemmerFactory()
+        factory      = StemmerFactory()
         self.stemmer = factory.create_stemmer()
 
     def Tokenize(self, text):
         text = text.lower()
-        text = text.split()
-        text = ' '.join(Parallel(n_jobs=-1)(delayed(re.sub)(r'[^A-Za-z0-9]+', '', w) for w in text))
-
+        
         if self.language == 'english':
             text = text.split()
+            text = Parallel(n_jobs=-1)(delayed(re.sub)(r'[^A-Za-z0-9]+', ' ', w) for w in text)
             text = Parallel(n_jobs=-1)(delayed(self.lemmatizer.lemmatize)(i) for i in text)
         else:
             text = self.stemmer.stem(text).split()

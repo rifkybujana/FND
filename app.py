@@ -9,7 +9,7 @@ import pickle
 import requests
 
 from bs4 import BeautifulSoup
-from LogisticRegression import LogisticRegressions
+from LogisticRegression import LogisticRegression
 from Preprocess import Tokenizer, Encoder
 from io import StringIO
 
@@ -43,7 +43,7 @@ submit_button = st.empty()
 submit = submit_button.button("Enter")
 
 #############################################################################################
-##################################### LOAD MODEL  ###########################################
+##################################### LOAD DATA #############################################
 #############################################################################################
 
 id_model = pickle.load(open('Data/id_logistic.pkl', 'rb'))
