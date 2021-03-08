@@ -1,6 +1,12 @@
 # -*- coding: utf-8 -*-
 from setuptools import setup, find_packages
 
+import nltk
+
+nltk.download('stopwords')
+nltk.download('punkt')
+nltk.download('wordnet')
+
 try:
     long_description = open("README.rst").read()
 except IOError:
