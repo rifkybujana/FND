@@ -6,3 +6,4 @@ nltk==3.5
 numpy==1.18.5
 beautifulsoup4==4.9.3
 Sastrawi==1.0.1
+matplotlib==3.2.2
