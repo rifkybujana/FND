@@ -81,39 +81,10 @@ To get a local copy up and running follow these simple steps.
 
 ### Prerequisites
 
-Install all the library used in this project
-* Streamlit
-  ```sh
-  pip install streamlit
-  ```
-* Sastrawi
-  ```sh
-  pip install Sastrawi
-  ```
-* NLTK
-  ```sh
-  pip install nltk
-  ```
-  and then you need to install some nltk data by:
-  ```
-  $ python3
-  >>> import nltk
-  >>> nltk.download('stopwords')
-  >>> nltk.download('punkt')
-  >>> nltk.download('wordnet')
-  ```
-* Pandas
-  ```sh
-  pip install pandas
-  ```
-* Joblib
-  ```sh
-  pip install joblib
-  ```
-* Pickle
-  ```sh
-  pip install pickle-mixin
-  ```
+You can easly install all the required package with:
+```sh
+$ pip install -r requirements.txt && python setup.py install
+```
   
 ### Installation
 
