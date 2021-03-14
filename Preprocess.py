@@ -39,7 +39,7 @@ class Encoder():
             self.vocab = vocab
 
     def CreateVocab(self, data, language):
-        vocab = ['unk', 'num']
+        vocab = ['<unk>', '<num>']
         for i in data:
             vocab += i
 
@@ -53,11 +53,11 @@ class Encoder():
         result = [0] * len(self.vocab)
         for i in text:
             if i == "<num>":
-                result[self.vocab.index("num")] = 1
+                result[self.vocab.index("<num>")] = 1
             else:
                 try:
                     result[self.vocab.index(i)] = 1
                 except:
-                    result[self.vocab.index("unk")] = 1
+                    result[self.vocab.index("<unk>")] = 1
         
         return result
