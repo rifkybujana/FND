@@ -11,7 +11,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/rifkybujana/FND">
-    <img src="https://i.imgur.com/RT9Exnu.png" width="180" height="140">
+    <img src="https://i.imgur.com/Wkx9XUI.png" width="180" height="140">
   </a>
 
   <h3 align="center">FND</h3>
@@ -59,9 +59,9 @@
 ## About The Project
 
 ![screenshot](https://i.imgur.com/tp7hOov.png)
-FND is an web application that can be used to predict whether a news is hoax or not. This app support 2 language, which is english and indonesian language.
-the english logistic regression model have been trained with 5000 hoax news and valid news data from [kaggle](https://www.kaggle.com/c/fake-news/data) that give 93%-95% accuracy from the testing dataset. But the indonesian model is just trained with 600 hoax news dataset by [Faisal Rahutomo, Inggrid Yanuar, Rosa Andrie Asmara](https://data.mendeley.com/datasets/p3hfgr5j3m/1) that give us 77% accuracy from the testing dataset.
-
+FND is an web application that can be used to predict whether a news is hoax or not. This app support 2 language, which is english and indonesian language. this app also using 2 different machine learning model which you can choose in the sidebar.
+the english logistic regression model have been trained with 20000 hoax news and valid news data from [kaggle](https://www.kaggle.com/c/fake-news/data) that give 94% accuracy from the testing dataset. But the indonesian model is just trained with 600 hoax news dataset by [Faisal Rahutomo, Inggrid Yanuar, Rosa Andrie Asmara](https://data.mendeley.com/datasets/p3hfgr5j3m/1) that give us 77% accuracy from the testing dataset.
+the second model were Convolutional Recurrent Neural Networks (CRNN) model, which has been trained with 20000 english hoax and valid news that give 95% accuracy and 84% for indonesian news, which this model was trained with 600 news.
 
 
 ### Built With
@@ -71,6 +71,7 @@ the english logistic regression model have been trained with 5000 hoax news and 
 * [NLTK](https://www.nltk.org/)
 * [Pandas](https://pandas.pydata.org/)
 * [Joblib](https://joblib.readthedocs.io/en/latest/)
+* [Tensorflow](https://www.tensorflow.org/)
 
 
 
@@ -81,39 +82,10 @@ To get a local copy up and running follow these simple steps.
 
 ### Prerequisites
 
-Install all the library used in this project
-* Streamlit
-  ```sh
-  pip install streamlit
-  ```
-* Sastrawi
-  ```sh
-  pip install Sastrawi
-  ```
-* NLTK
-  ```sh
-  pip install nltk
-  ```
-  and then you need to install some nltk data by:
-  ```
-  $ python3
-  >>> import nltk
-  >>> nltk.download('stopwords')
-  >>> nltk.download('punkt')
-  >>> nltk.download('wordnet')
-  ```
-* Pandas
-  ```sh
-  pip install pandas
-  ```
-* Joblib
-  ```sh
-  pip install joblib
-  ```
-* Pickle
-  ```sh
-  pip install pickle-mixin
-  ```
+You can easly install all the required package with:
+```sh
+$ python setup.py install
+```
   
 ### Installation
 
@@ -177,8 +149,10 @@ Project Link: [https://github.com/rifkybujana/FND](https://github.com/rifkybujan
 
 ## Acknowledgements
 
+Special Thanks to Intel, Orbit Future Academy and Indonesian Ministry of Education and Culture for holding AI For Youth Indonesia, because without it we can't make this project real or even we won't know anything about machine learning.
+
 * [kaggle](https://www.kaggle.com/c/fake-news/data)
-* [Indonesian Hoax News Dataset by Faisal Rahutomo, Inggrid Yanuar, Rosa Andrie Asmara](https://data.mendeley.com/datasets/p3hfgr5j3m/1)
+* [RAHUTOMO, FAISAL; Yanuar, Inggrid; ANDRIE ASMARA, ROSA (2018), “INDONESIAN HOAX NEWS DETECTION DATASET”, Mendeley Data, V1, doi: 10.17632/p3hfgr5j3m.1](https://data.mendeley.com/datasets/p3hfgr5j3m/1)
 
 
 
@@ -193,7 +167,7 @@ Project Link: [https://github.com/rifkybujana/FND](https://github.com/rifkybujan
 [stars-url]: https://github.com/rifkybujana/FND/stargazers
 [issues-shield]: https://img.shields.io/github/issues/rifkybujana/FND.svg?style=for-the-badge
 [issues-url]: https://github.com/rifkybujana/FND/issues
-[license-shield]: https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge
+[license-shield]: https://img.shields.io/badge/License-GNU-yellow.svg?style=for-the-badge
 [license-url]: ./LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/rifkybujana

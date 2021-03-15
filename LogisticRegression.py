@@ -1,7 +1,7 @@
 import numpy as np
 from numpy import log, dot, e
 
-class LogisticRegressions:
+class LogisticRegression:
     def __init__(self, lr=0.05, epochs=100, intercept=True):
         self.lr = lr
         self.epochs = epochs
