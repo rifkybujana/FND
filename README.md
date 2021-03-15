@@ -83,7 +83,7 @@ To get a local copy up and running follow these simple steps.
 
 You can easly install all the required package with:
 ```sh
-$ pip install -r requirements.txt && python setup.py install
+$ python setup.py install
 ```
   
 ### Installation
