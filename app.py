@@ -1,6 +1,17 @@
-import streamlit as st
 import requests
-import classifier
+import pickle
+import streamlit as st
+import numpy as np
+
+from keras.preprocessing.text import Tokenizer as tk
+from keras.preprocessing.sequence import pad_sequences
+from keras.models import Sequential
+from keras.layers import Dense, Flatten, LSTM, Conv1D, MaxPooling1D, Dropout, Activation
+from keras.layers.embeddings import Embedding
+from keras.models import load_model
+
+from LogisticRegression import LogisticRegression
+from Preprocess import Tokenizer, Encoder
 
 from bs4 import BeautifulSoup
 
@@ -16,6 +27,38 @@ st.sidebar.write("""## Settings""")
 language    = st.sidebar.selectbox('language', ['english', 'indonesian'])
 model_type  = st.sidebar.selectbox('Machine Learning Model', ['Logistic Regression', 'CRNN'])
 
+
+
+def Classify(text, language, model):
+    with st.spinner('Tokenizing...'):
+        tokenizer = Tokenizer(language)
+        data = tokenizer.Tokenize(text)
+
+    with st.spinner('Predicting...'):
+        if model == 'Logistic Regression':    
+            model   = pickle.load(open('Data/Model/Logistic Regression/' + language + '.pkl', 'rb'))
+            encoder = pickle.load(open('Data/Encoder/' + language + '.pkl', 'rb'))
+
+            data = encoder.OneHot(data)
+            data = np.array(data).reshape(1, len(data))
+
+            prediction = model.predict_prob(data)
+
+        else:    
+            model   = load_model('Data/Model/CRNN/' + language + '.h5')
+            encoder = pickle.load(open('Data/Tokenizer/' + language + '.pkl', 'rb'))
+
+            data = ' '.join(data)
+            data = encoder.texts_to_sequences(np.array([data, ]))
+            
+            if language == 'indonesian':
+                data = pad_sequences(data, maxlen=100)
+            else:
+                data = pad_sequences(data, maxlen=300)
+
+            prediction = model.predict(data)[0]
+
+    return prediction
 
 
 if submit:
@@ -41,7 +84,7 @@ if submit:
                 data = text
 
     if data:
-        prediction = classifier.Classify(data, language, model_type)
+        prediction = Classify(data, language, model_type)
 
         if prediction >= 0.5:
             st.write("""### i {}% sure its fake""".format(str((prediction - 0.5) * 200)))
