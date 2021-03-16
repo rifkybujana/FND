@@ -80,8 +80,8 @@ if submit:
                         data = article
                     else:
                         st.write("Cant Process the article in this link")
-                except:
-                    st.write("Cant Process the article in this link")
+                except Exception as e:
+                    st.write(e)
             else:
                 data = text
 
