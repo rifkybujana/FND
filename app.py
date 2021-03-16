@@ -29,6 +29,10 @@ model_type  = st.sidebar.selectbox('Machine Learning Model', ['CRNN', 'Logistic 
 
 st.sidebar.markdown("[Github Page](https://github.com/rifkybujana/FND)")
 
+st.warning("""
+#### WARNING!
+this machine learning model is still a prototype, it may give you wrong prediction.
+""")
 
 def Classify(text, language, model):
     with st.spinner('Tokenizing...'):
