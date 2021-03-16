@@ -24,8 +24,8 @@ submit  = st.button("Enter")
 
 st.sidebar.write("""## Settings""")
 
-language    = st.sidebar.selectbox('language', ['english', 'indonesian'])
-model_type  = st.sidebar.selectbox('Machine Learning Model', ['Logistic Regression', 'CRNN'])
+language    = st.sidebar.selectbox('language', ['indonesian', 'english'])
+model_type  = st.sidebar.selectbox('Machine Learning Model', ['CRNN', 'Logistic Regression'])
 
 
 
