@@ -58,7 +58,7 @@ def Classify(text, language, model):
 
             prediction = model.predict(data)[0]
 
-    return prediction
+    return prediction[0]
 
 
 if submit:
