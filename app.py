@@ -115,7 +115,7 @@ this machine learning model is still a prototype, it may give you wrong predicti
 """)
 
 st.text("")
-with st.beta_expander('Detailed Information About this app'):
+with st.beta_expander('More Information About this app'):
     st.write("""
     This project is the result of our learning from **AI For Youth** for more than 6 months. 
     This project was created because of our concern about the enormous impact of the very rapid spread of hoax news in Indonesia.
@@ -123,6 +123,7 @@ with st.beta_expander('Detailed Information About this app'):
     and also this application can introduce to many people about artificial intelligence that can really help human life and not vice versa.
     \nAuthor\t: [Rifky Bujana Bisri](mailto:rifkybujanabisri@gmail.com), [Aikyo Dzaki Aroef](mailto:aikyodzakiaroef@gmail.com)
     \nLicense\t: [GPL-3.0 License](https://github.com/rifkybujana/FND/blob/main/LICENSE)
+    \nYour can find more information about this app and the source code in the [github repository](https://github.com/rifkybujana/FND)
     """)
 
     statistic = pd.read_csv('Data/Statistic/overall.csv')
