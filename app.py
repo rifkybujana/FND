@@ -27,6 +27,7 @@ st.sidebar.write("""## Settings""")
 language    = st.sidebar.selectbox('language', ['indonesian', 'english'])
 model_type  = st.sidebar.selectbox('Machine Learning Model', ['CRNN', 'Logistic Regression'])
 
+st.sidebar.markdown("[Github Page](https://github.com/rifkybujana/FND)")
 
 
 def Classify(text, language, model):
