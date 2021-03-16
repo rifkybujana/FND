@@ -92,14 +92,14 @@ if submit:
         if prediction >= 0.5:
             how_sure = round((prediction - 0.5) * 200, 2)
 
-            if how_sure >= 0.5:
+            if how_sure >= 50:
                 st.write("""### i {}% sure its fake""".format(str(how_sure)))
             else:
                 st.write("""### im not sure about this, but i think its fake....""")
         else:
             how_sure = round((0.5 - prediction) * 200, 2)
 
-            if how_sure >= 0.5:
+            if how_sure >= 50:
                 st.write("""### i {}% sure its valid""".format(str(how_sure)))
             else:
                 st.write("""### hmm... im not sure about this, but i think its valid""")
