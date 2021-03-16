@@ -89,6 +89,16 @@ if submit:
         prediction = Classify(data, language, model_type)
 
         if prediction >= 0.5:
-            st.write("""### i {}% sure its fake""".format(str((prediction - 0.5) * 200)))
+            how_sure = round((prediction - 0.5) * 200, 2)
+
+            if how_sure >= 0.5:
+                st.write("""### i {}% sure its fake""".format(str(how_sure)))
+            else:
+                st.write("""### im not too sure about this, but i think its fake....""")
         else:
-            st.write("""### i {}% sure its valid""".format(str((0.5 - prediction) * 200)))
+            how_sure = round((0.5 - prediction) * 200, 2)
+
+            if how_sure >= 0.5:
+                st.write("""### i {}% sure its valid""".format(str(how_sure)))
+            else:
+                st.write("""### hmm... im not sure about this, but i think its valid""")
