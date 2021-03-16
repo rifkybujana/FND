@@ -62,6 +62,8 @@ def Classify(text, language, model):
 
 
 if submit:
+    data = None
+
     with st.spinner("Reading Data..."):
         if text:
             if text[:4].lower() == 'http':
