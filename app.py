@@ -2,6 +2,8 @@ import requests
 import pickle
 import streamlit as st
 import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 
 from keras.preprocessing.text import Tokenizer as tk
 from keras.preprocessing.sequence import pad_sequences
@@ -29,10 +31,6 @@ model_type  = st.sidebar.selectbox('Machine Learning Model', ['CRNN', 'Logistic 
 
 st.sidebar.markdown("[Github Page](https://github.com/rifkybujana/FND)")
 
-st.warning("""
-#### WARNING!
-this machine learning model is still a prototype, it may give you wrong prediction.
-""")
 
 def Classify(text, language, model):
     with st.spinner('Tokenizing...'):
@@ -107,3 +105,46 @@ if submit:
                 st.write("""### i {}% sure its valid""".format(str(how_sure)))
             else:
                 st.write("""### hmm... im not sure about this, but i think its valid""")
+
+
+st.text("")
+st.text("")
+st.warning("""
+#### WARNING!
+this machine learning model is still a prototype, it may give you wrong prediction.
+""")
+
+st.text("")
+with st.beta_expander('Detailed Information About this app'):
+    st.write("""
+    This project is the result of our learning from **AI For Youth** for more than 6 months. 
+    This project was created because of our concern about the enormous impact of the very rapid spread of hoax news in Indonesia.
+    although this application is still very far from perfect, we hope this application can be useful for anyone.
+    and also this application can introduce to many people about artificial intelligence that can really help human life and not vice versa.
+    \nAuthor\t: [Rifky Bujana Bisri](mailto:rifkybujanabisri@gmail.com), [Aikyo Dzaki Aroef](mailto:aikyodzakiaroef@gmail.com)
+    \nLicense\t: [GPL-3.0 License](https://github.com/rifkybujana/FND/blob/main/LICENSE)
+    """)
+
+    statistic = pd.read_csv('Data/Statistic/overall.csv')
+    
+    plot, menu = st.beta_columns(2)
+    
+    lang = menu.selectbox('Language Data', ['Indonesian', 'English'])
+    data = menu.radio('Data to show', ['dataset', 'accuracy'])
+    
+    dataset_data = None
+    columns_data = None
+    columns_colr = None
+    if data == 'dataset':
+        dataset_data = statistic[lang][:3].values
+        columns_data = np.array(['Total', 'Training', 'Testing'])
+        columns_colr = ['r', 'g', 'b']
+    else:
+        dataset_data = statistic[lang][3:].values
+        columns_data = statistic["Parameter"][3:].values
+        columns_colr = ['r', 'r', 'b', 'b']
+    
+    fig, ax = plt.subplots()
+    bar = ax.bar(columns_data, dataset_data.tolist(), 0.25, color=columns_colr)
+    ax.set_xticklabels(columns_data, rotation=90)
+    plot.pyplot(plt)
