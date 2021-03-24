@@ -110,7 +110,7 @@ You can use the pretrained model for your project, or you can train the model wi
   ```
 
 * Help
-  ```sh
+  ```
   usage: Predict.py [-h] [--model_path MODEL_PATH] url
 
   This tools is used to predict a news from a given url is true or false
@@ -134,7 +134,7 @@ You can use the pretrained model for your project, or you can train the model wi
   ```
 
 * Help
-  ```sh
+  ```
   usage: Train.py [-h] [--test_size TEST_SIZE] [--stem STEM] [--generalize_number GENERALIZE_NUMBER] [--random_state RANDOM_STATE] [--vocab_size VOCAB_SIZE]
                 path save_path epochs
 
@@ -172,7 +172,7 @@ You can use the pretrained model for your project, or you can train the model wi
   ```
 
 * Help
-  ```sh
+  ```
   usage: Scraper.py [-h] url
 
   This tools is use to scrap article from a given link
