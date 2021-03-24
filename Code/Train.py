@@ -173,3 +173,31 @@ if __name__ == "__main__":
     args = parser.parse_args()
     
     ########################################### END ARGUMENTS ##############################################
+
+    # read dataset and split the text and label
+    x, y = ReadData(args.path)
+
+    # if argument stem is True, then stem the text dataset
+    if args.stem:
+        stemmer = CreateStemmer()
+        x = Stem(x, stemmer)
+    
+    # if argument generalize_number is true, then generalize the number from the text dataset
+    if args.genealize_number:
+        x = Generalize_Number(x)
+
+    # split the dataset into train and test dataset
+    xTrain, xTest, yTrain, yTest = SplitData(x, y, args.test_size, args.random_state)
+
+    # create CBRNN model
+    model = CreateModel(xTrain, args.vocab_size)
+
+    # train the model
+    Fit(model, xTrain, xTest, yTrain, yTest, args.epochs)
+    
+    # evaluate the model
+    evaluation = model.evaluate(xTest, yTest)
+    print("Accuracy: {}\nLoss: {}".format(evaluation[1], evaluation[0]))
+
+    # save the model
+    SaveModel(model, args.save_path)
