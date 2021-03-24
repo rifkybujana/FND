@@ -1,8 +1,0 @@
-Parameter,Indonesian,English
-Total Dataset,600,20.000
-Training Dataset,540,18.000
-Testing Dataset,60,2.000
-CRNN Train Acc.,99.9,99.9
-CRNN Test Acc.,84,95
-LR Train Acc.,99.9,99.9
-LR Test Acc.,76,94

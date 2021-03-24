@@ -59,9 +59,9 @@
 ## About The Project
 
 ![screenshot](https://i.imgur.com/tp7hOov.png)
-FND is an web application that can be used to predict whether a news is hoax or not. This app support 2 language, which is english and indonesian language. this app also using 2 different machine learning model which you can choose in the sidebar.
-the english logistic regression model have been trained with 20000 hoax news and valid news data from [kaggle](https://www.kaggle.com/c/fake-news/data) that give 94% accuracy from the testing dataset. But the indonesian model is just trained with 600 hoax news dataset by [Faisal Rahutomo, Inggrid Yanuar, Rosa Andrie Asmara](https://data.mendeley.com/datasets/p3hfgr5j3m/1) that give us 77% accuracy from the testing dataset.
-the second model were Convolutional Recurrent Neural Networks (CRNN) model, which has been trained with 20000 english hoax and valid news that give 95% accuracy and 84% for indonesian news, which this model was trained with 600 news.
+FND is a machine learning project that were made to predict whether a news is fake or not. This project are using Bidirectional Recurrent Neural Networks (BRNN) that trained by 600 indonesian fake news dataset and 20.000 english fake news dataset. The model have 85% accuracy for indonesian news and 98% accuracy for the english news. You can use the trained model in the `Data/Model` folder or you can train your own model.
+
+[How to use it](#usage)
 
 
 ### Built With
@@ -91,11 +91,7 @@ $ python setup.py install
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/rifkybujana/FND.git
-   ```
-2. Run this webapp in your localhost by simply:
-   ```sh
-   streamlit run app.py
+   $ git clone https://github.com/rifkybujana/FND.git
    ```
 
 
@@ -103,10 +99,14 @@ $ python setup.py install
 <!-- USAGE -->
 ## Usage
 
-To use this app to predict whether a news is real or not, simply just put a text of an article into the textbox, or you can write it in a file without any paragraf (just 1 line). Or you can put a list of article separated by enter (1 line for every article), hit enter and wait until the process is done.
+You can use the pretrained model for your project, or you can train the model with your own dataset.
 
-```Note: Dont forget to make sure that you're using the correct language settings in the sidebar```
+### How to train 
 
+```sh
+$ cd Code
+$ python train.py <dataset path> <epochs> <path for saving the model>
+```
 
 
 

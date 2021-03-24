@@ -2,13 +2,8 @@
 from setuptools import setup, find_packages
 
 import os
-import nltk
 
 os.system("pip install -r requirements.txt")
-
-nltk.download('stopwords')
-nltk.download('punkt')
-nltk.download('wordnet')
 
 try:
     long_description = open("README.rst").read()
