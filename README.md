@@ -59,7 +59,7 @@
 ## About The Project
 
 ![screenshot](https://i.imgur.com/tp7hOov.png)
-FND is a machine learning project that were made to predict whether a news is fake or not. This project are using Bidirectional Recurrent Neural Networks (BRNN) that trained by 600 indonesian fake news dataset and 20.000 english fake news dataset. The model have 85% accuracy for indonesian news and 98% accuracy for the english news. You can use the trained model in the `Data/Model` folder or you can train your own model.
+FND is a machine learning project that were made to predict whether a news is fake or not. This project are using Convolutional Bidirectional Recurrent Neural Networks (CBRNN) that trained by 600 indonesian fake news dataset and 20.000 english fake news dataset. The model have 85% accuracy for indonesian news and 98% accuracy for the english news. You can use the trained model in the `Data/Model` folder or you can train your own model.
 
 [How to use it](#usage)
 
@@ -101,12 +101,88 @@ $ python setup.py install
 
 You can use the pretrained model for your project, or you can train the model with your own dataset.
 
-### How to train 
+### How to predict an article from url
 
-```sh
-$ cd Code
-$ python train.py <dataset path> <epochs> <path for saving the model>
-```
+* Basic Usage
+  ```sh
+  $ cd Code
+  $ python Predict.py <url>
+  ```
+
+* Help
+  ```sh
+  usage: Predict.py [-h] [--model_path MODEL_PATH] url
+
+  This tools is used to predict a news from a given url is true or false
+
+  positional arguments:
+    url                   url of the article you want to predict
+
+  optional arguments:
+    -h, --help            show this help message and exit
+
+    --model_path          MODEL_PATH
+                          your own model, default: .\Data\Model\indonesian
+  ```
+
+### How to train the model with your own dataset
+
+* Basic Usage
+  ```sh
+  $ cd Code
+  $ python train.py <dataset path> <path for saving the model> <epochs>
+  ```
+
+* Help
+  ```sh
+  usage: Train.py [-h] [--test_size TEST_SIZE] [--stem STEM] [--generalize_number GENERALIZE_NUMBER] [--random_state RANDOM_STATE] [--vocab_size VOCAB_SIZE]
+                path save_path epochs
+
+  This tools is used to create and train the model with your own dataset
+
+  positional arguments:
+    path                  your dataset path
+    save_path             where do you want to save the model
+    epochs                number of iteration for the model to train from the training dataset, default: 10
+
+  optional arguments:
+    -h, --help            show this help message and exit
+
+    --test_size           TEST_SIZE
+                          test dataset size based on total from 0 - 1, default: 0.1
+
+    --stem STEM           do you want to stem the text first?, default: True
+
+    --generalize_number   GENERALIZE_NUMBER
+                          change all numeric value into "[NUM]", default: True
+
+    --random_state        RANDOM_STATE
+                          random state type for randomize the dataset for train and test, default: None
+
+    --vocab_size          VOCAB_SIZE
+                          just get top x word from the whole dataset, default: 1000
+  ```
+
+### How to scrap article from a link
+
+* Basic Usage
+  ```sh
+  $ cd Code
+  $ python Scraper.py <url>
+  ```
+
+* Help
+  ```sh
+  usage: Scraper.py [-h] url
+
+  This tools is use to scrap article from a given link
+
+  positional arguments:
+    url         url of the article you want to scrap
+
+  optional arguments:
+    -h, --help  show this help message and exit
+  ```
 
 
 
