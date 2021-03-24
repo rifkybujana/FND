@@ -58,7 +58,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-FND is a machine learning project that were made to predict whether a news is fake or not. This project are using Convolutional Bidirectional Recurrent Neural Networks (CBRNN) that trained by 600 indonesian fake news dataset and 20.000 english fake news dataset. The model have 85% accuracy for indonesian news and 98% accuracy for the english news. You can use the trained model in the `Data/Model` folder or you can train your own model.
+FND is a machine learning project that were made to predict whether a news is fake or not. This project are using Convolutional Bidirectional Recurrent Neural Networks (CBRNN) that trained by 600 indonesian fake news dataset and 20.000 english fake news dataset. The model have 85% accuracy for indonesian news and 95% accuracy for the english news. You can use the trained model in the `Data/Model` folder or you can train your own model.
 
 [How to use it](#usage)
 
