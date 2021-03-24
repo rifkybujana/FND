@@ -71,6 +71,7 @@ FND is a machine learning project that were made to predict whether a news is fa
 * [Pandas](https://pandas.pydata.org/)
 * [Joblib](https://joblib.readthedocs.io/en/latest/)
 * [Tensorflow](https://www.tensorflow.org/)
+* [Newspaper3k](https://newspaper.readthedocs.io/en/latest/)
 
 
 
