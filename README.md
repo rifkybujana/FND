@@ -130,7 +130,7 @@ You can use the pretrained model for your project, or you can train the model wi
 * Basic Usage
   ```sh
   $ cd Code
-  $ python train.py <dataset path> <path for saving the model> <epochs>
+  $ python train.py <dataset path> <save path> <epochs>
   ```
 
 * Help
