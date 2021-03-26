@@ -141,7 +141,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="""This tools is used to create and train the model with your own dataset""")
     parser.add_argument('path', type=str, help="""your dataset path""")
     parser.add_argument('save_path', type=str, help="""where do you want to save the model""")
-    parser.add_argument('lang', type=str, help"""dataset language [English, Bahasa], default: Bahasa""", default='Bahasa')
+    parser.add_argument('lang', type=str, help="""dataset language [English, Bahasa], default: Bahasa""", default='Bahasa')
     parser.add_argument('epochs', type=int, help="""number of iteration for the model to train from the training dataset, default: 10""", default=10)
     parser.add_argument('--test_size', type=float, help="""test dataset size based on total from 0 - 1, default: 0.1""", default=0.1)
     parser.add_argument('--random_state', type=int, help="""random state type for randomize the dataset for train and test, default: None""", default=None)
