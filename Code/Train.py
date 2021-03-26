@@ -1,10 +1,8 @@
 import tensorflow as tf
-import numpy as np
-import re
 import argparse
 import pandas as pd
 
-from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
+from Preprocess import *
 from sklearn.model_selection import train_test_split
 
 """
@@ -13,17 +11,6 @@ This tools is used to train the model with your own dataset
 Author: Rifky Bujana Bisri
 email : rifkybujanabisri@gmail.com
 """
-
-def CreateStemmer():
-    """
-    Create indonesian stemmer
-
-    ### Result\n
-    indonesian "Sastrawi" stemmer object (dtype: `object`)
-    """
-
-    factory = StemmerFactory()
-    return factory.create_stemmer()
 
 def ReadData(path):
     """
@@ -51,32 +38,22 @@ def ReadData(path):
 
     return x, y
 
-def Stem(texts, stemmer):
+def Preprocess(data, preprocess):
     """
-    Stem all text in the text dataset
+    Preprocess all the text in the data
 
     ### Parameter\n
-    texts : text dataset (dtype: `numpy array`)\n
-    stemmer : sastrawi stemmer object (dtype: `object`)
+    data : text dataset (dtype: `numpy array`)\n
+    preprocess : preprocessor object (dtype: `object`)
 
     ### Result\n
-    return numpy array containing the stemmed text dataset
+    return numpy array that contain preprocessed text
     """
 
-    return np.array([stemmer.stem(i) for i in texts])
+    for i in range(len(data)):
+        data[i] = preprocess.Preprocess(data[i])
 
-def Generalize_Number(texts):
-    """
-    Generalize all numerical value in the text into `[NUM]`
-
-    ### Parameter\n
-    texts : text dataset (dtype: `numpy array`)
-
-    ### Result\n
-    return numpy array containing the text dataset that has been generalized 
-    """
-
-    return np.array([re.sub(r'\d+', '[NUM]', i) for i in texts])
+    return data
 
 def SplitData(x, y, test_size, random_state):
     """
@@ -164,10 +141,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="""This tools is used to create and train the model with your own dataset""")
     parser.add_argument('path', type=str, help="""your dataset path""")
     parser.add_argument('save_path', type=str, help="""where do you want to save the model""")
+    parser.add_argument('lang', type=str, help"""dataset language [English, Bahasa], default: Bahasa""", default='Bahasa')
     parser.add_argument('epochs', type=int, help="""number of iteration for the model to train from the training dataset, default: 10""", default=10)
     parser.add_argument('--test_size', type=float, help="""test dataset size based on total from 0 - 1, default: 0.1""", default=0.1)
-    parser.add_argument('--stem', type=bool, help="""do you want to stem the text first?, default: True""", default=True)
-    parser.add_argument('--generalize_number', type=bool, help="""change all numeric value into "[NUM]", default: True""", default=True)
     parser.add_argument('--random_state', type=int, help="""random state type for randomize the dataset for train and test, default: None""", default=None)
     parser.add_argument('--vocab_size', type=int, help="""just get top x word from the whole dataset, default: 1000""", default=1000)
     args = parser.parse_args()
@@ -177,14 +153,9 @@ if __name__ == "__main__":
     # read dataset and split the text and label
     x, y = ReadData(args.path)
 
-    # if argument stem is True, then stem the text dataset
-    if args.stem:
-        stemmer = CreateStemmer()
-        x = Stem(x, stemmer)
-    
-    # if argument generalize_number is true, then generalize the number from the text dataset
-    if args.genealize_number:
-        x = Generalize_Number(x)
+    # Preprocess the data
+    preprocess = GetObject(args.lang)
+    x = Preprocess(x, preprocess)
 
     # split the dataset into train and test dataset
     xTrain, xTest, yTrain, yTest = SplitData(x, y, args.test_size, args.random_state)

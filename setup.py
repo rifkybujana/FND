@@ -2,6 +2,11 @@
 from setuptools import setup, find_packages
 
 import os
+import nltk
+
+nltk.download('wordnet')
+nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
 
 os.system("pip install -r requirements.txt")
 

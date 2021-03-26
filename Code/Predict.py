@@ -1,12 +1,10 @@
 import tensorflow as tf
 import numpy as np
-import re
 import argparse
 import sys
 
 from Scraper import Scrap
-
-from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
+from Preprocess import *
 
 """
 This script are used to predict an article from a given link
@@ -14,17 +12,6 @@ This script are used to predict an article from a given link
 Author: Rifky Bujana Bisri
 email : rifkybujanabisri@gmail.com
 """
-
-def CreateStemmer():
-    """
-    Create indonesian stemmer
-
-    ### Result\n
-    indonesian "Sastrawi" stemmer object (dtype: `object`)
-    """
-
-    factory = StemmerFactory()
-    return factory.create_stemmer()
 
 def LoadModel(path):
     """
@@ -39,12 +26,13 @@ def LoadModel(path):
 
     return tf.keras.models.load_model(path)
 
-def Predict(model, stemmer, text):
+def Predict(model, preprocess, text):
     """
     Make a prediction of the article from the url
 
     ### Parameter\n
     model : model object that will be used to make the prediction (dtype: `object`)\n
+    preprocess : preprocess object, `check Preprocess.py`\n
     text : article text (dtype: `string`)
 
     ### Result\n
@@ -53,10 +41,11 @@ def Predict(model, stemmer, text):
     0.5 - 1 mean that the model predict its fake
     """
 
-    text = stemmer.stem(text)
-    text = re.sub(r'\d+', '[NUM]', text)
+    text = preprocess.Preprocess(text)
 
     return model.predict(np.array([text]))[0][0]
+
+relative_path = """./Data/Model/"""
 
 if __name__ == "__main__":
 
@@ -64,7 +53,7 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="This tools is used to predict a news from a given url is true or false")
     parser.add_argument('url', type=str, help='url of the article you want to predict')
-    parser.add_argument('--model_path', type=str, help='your own model, default: .\Data\Model\indonesian', default='.\Data\Model\indonesian')
+    parser.add_argument('lang', type=str, help="""article language [English, Bahasa], default: Bahasa""", default='Bahasa')
     args = parser.parse_args()
 
     ########################################### END ARGUMENTS ##############################################
@@ -74,11 +63,8 @@ if __name__ == "__main__":
     if not text:
         sys.exit()
 
-    stemmer = CreateStemmer()
-    model = LoadModel(args.model_path)
-    prediction = Predict(model, stemmer, text)
+    model = LoadModel(relative_path + args.lang.lower())
+    preprocess = GetObject(args.lang)
 
-    if prediction >= 0.5:
-        print("Fake")
-    else:
-        print("Valid")
+    prediction = Predict(model, preprocess, text)
+    print(prediction)
