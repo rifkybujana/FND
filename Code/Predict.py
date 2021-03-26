@@ -58,7 +58,10 @@ if __name__ == "__main__":
 
     ########################################### END ARGUMENTS ##############################################
 
-    text = Scrap(args.url)
+    if args.lang == 'Bahasa':
+        text = Scrap(args.url, 'id')
+    else:
+        text = Scrap(args.url, 'en')
 
     if not text:
         sys.exit()

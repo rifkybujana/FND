@@ -9,7 +9,7 @@ Author: Rifky Bujana Bisri
 email : rifkybujanabisri@gmail.com
 """
 
-def Scrap(url):
+def Scrap(url, lang):
     """
     Scrap article from url
 
@@ -21,7 +21,7 @@ def Scrap(url):
     return the article text (dtype: `string`)
     """
 
-    article = Article(url)
+    article = Article(url, language=lang)
     article.download()
     article.parse()
 
