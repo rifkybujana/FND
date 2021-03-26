@@ -111,18 +111,16 @@ You can use the pretrained model for your project, or you can train the model wi
 
 * Help
   ```
-  usage: Predict.py [-h] [--model_path MODEL_PATH] url
+  usage: Predict.py [-h] url lang
 
   This tools is used to predict a news from a given url is true or false
 
   positional arguments:
-    url                   url of the article you want to predict
+    url         url of the article you want to predict
+    lang        article language [English, Bahasa], default: Bahasa
 
   optional arguments:
-    -h, --help            show this help message and exit
-
-    --model_path          MODEL_PATH
-                          your own model, default: .\Data\Model\indonesian
+    -h, --help  show this help message and exit
   ```
 
 ### How to train the model with your own dataset
@@ -135,31 +133,23 @@ You can use the pretrained model for your project, or you can train the model wi
 
 * Help
   ```
-  usage: Train.py [-h] [--test_size TEST_SIZE] [--stem STEM] [--generalize_number GENERALIZE_NUMBER] [--random_state RANDOM_STATE] [--vocab_size VOCAB_SIZE]
-                path save_path epochs
+  usage: Train.py [-h] [--test_size TEST_SIZE] [--random_state RANDOM_STATE] [--vocab_size VOCAB_SIZE] path save_path lang epochs
 
   This tools is used to create and train the model with your own dataset
 
   positional arguments:
     path                  your dataset path
     save_path             where do you want to save the model
+    lang                  dataset language [English, Bahasa], default: Bahasa
     epochs                number of iteration for the model to train from the training dataset, default: 10
 
   optional arguments:
     -h, --help            show this help message and exit
-
-    --test_size           TEST_SIZE
+    --test_size TEST_SIZE
                           test dataset size based on total from 0 - 1, default: 0.1
-
-    --stem STEM           do you want to stem the text first?, default: True
-
-    --generalize_number   GENERALIZE_NUMBER
-                          change all numeric value into "[NUM]", default: True
-
-    --random_state        RANDOM_STATE
+    --random_state RANDOM_STATE
                           random state type for randomize the dataset for train and test, default: None
-
-    --vocab_size          VOCAB_SIZE
+    --vocab_size VOCAB_SIZE
                           just get top x word from the whole dataset, default: 1000
   ```
 
