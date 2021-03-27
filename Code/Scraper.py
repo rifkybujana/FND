@@ -9,6 +9,11 @@ Author: Rifky Bujana Bisri
 email : rifkybujanabisri@gmail.com
 """
 
+lang_id = {
+    'Bahasa': 'id',
+    'English': 'en'
+}
+
 def Scrap(url, lang):
     """
     Scrap article from url
@@ -21,7 +26,10 @@ def Scrap(url, lang):
     return the article text (dtype: `string`)
     """
 
-    article = Article(url, language=lang)
+    if not lang in lang_id:
+        print('language not availabel\nLanguage: {}'.format(list(lang_id.keys())))
+
+    article = Article(url, language=lang_id[lang])
     article.download()
     article.parse()
 
@@ -37,11 +45,12 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="This tools is use to scrap article from a given link")
     parser.add_argument('url', type=str, help='url of the article you want to scrap')
+    parser.add_argument('lang', type=str, help='article language, [Bahasa, English], default: `Bahasa`', default='Bahasa')
     args = parser.parse_args()
     
     ########################################### END ARGUMENTS ##############################################
 
-    text = Scrap(args.url)
+    text = Scrap(args.url, args.lang)
 
     if text:
-        print(Scrap(args.url))
+        print(text)

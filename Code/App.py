@@ -20,10 +20,7 @@ if button:
     with st.spinner("reading article..."):
         if user_input:
             if user_input[:4] == 'http':
-                if language == 'Bahasa':
-                    text = Scrap(user_input, 'id')
-                else:
-                    text = Scrap(user_input, 'en')
+                text = Scrap(args.url, args.lang)
             else:
                 text = user_input
 
