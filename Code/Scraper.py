@@ -26,7 +26,7 @@ def Scrap(url, lang):
     return the article text (dtype: `string`)
     """
 
-    if not lang in lang_id:
+    if not lang in lang_id.keys():
         print('language not availabel\nLanguage: {}'.format(list(lang_id.keys())))
 
     article = Article(url, language=lang_id[lang])
