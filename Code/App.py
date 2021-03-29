@@ -4,6 +4,13 @@ import Predict
 from Preprocess import *
 from Scraper import Scrap
 
+"""
+This is a webapp to show the model prediction with GUI
+to run this, you can easily run the following command:
+
+streamlit run App.py
+"""
+
 st.write('Fake News Detection AI')
 
 user_input  = st.text_area("Put article url or the full text")
