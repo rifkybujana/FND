@@ -1,6 +1,7 @@
 import tensorflow as tf
 import argparse
 import pandas as pd
+import sys
 
 from Preprocess import *
 from sklearn.model_selection import train_test_split
@@ -170,5 +171,10 @@ if __name__ == "__main__":
     evaluation = model.evaluate(xTest, yTest)
     print("Accuracy: {}\nLoss: {}".format(evaluation[1], evaluation[0]))
 
-    # save the model
-    SaveModel(model, args.save_path)
+    save_confirm = input("Save model? [Y]/N")
+    
+    if save_confirm.lower() == 'y' or save_confirm == '':
+        # save the model
+        SaveModel(model, args.save_path)
+    else:
+        sys.exit("model not saved")
