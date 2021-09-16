@@ -75,13 +75,6 @@ FND is a machine learning project that were made to predict whether a news is fa
 ## Getting Started
 
 To get a local copy up and running follow these simple steps.
-
-### Prerequisites
-
-You can easly install all the required package with:
-```sh
-$ python setup.py install
-```
   
 ### Installation
 
