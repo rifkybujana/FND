@@ -89,6 +89,11 @@ $ python setup.py install
    ```sh
    $ git clone https://github.com/rifkybujana/FND.git
    ```
+   
+2. Install the required package
+   ```sh
+   $ python setup.py install
+   ```
 
 
 
@@ -97,7 +102,7 @@ $ python setup.py install
 
 <small>Note: CLI Support comming soon</small>
 
-```
+```sh
 $ streamlit run App.py
 ```
 
