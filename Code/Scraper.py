@@ -1,7 +1,5 @@
 from newspaper import Article
 
-import argparse
-
 """
 This script can be used to scrap article from a given link
 
@@ -9,12 +7,7 @@ Author: Rifky Bujana Bisri
 email : rifkybujanabisri@gmail.com
 """
 
-lang_id = {
-    'Bahasa': 'id',
-    'English': 'en'
-}
-
-def Scrap(url, lang):
+def Scrap(url):
     """
     Scrap article from url
 
@@ -25,11 +18,8 @@ def Scrap(url, lang):
     ### Result\n
     return the article text (dtype: `string`)
     """
-
-    if not lang in lang_id.keys():
-        print('language not availabel\nLanguage: {}'.format(list(lang_id.keys())))
-
-    article = Article(url, language=lang_id[lang])
+    
+    article = Article(url, language='id')
     article.download()
     article.parse()
 
@@ -38,19 +28,3 @@ def Scrap(url, lang):
         return None
 
     return article.text
-
-if __name__ == "__main__":
-    
-    ############################################# ARGUMENTS ################################################
-
-    parser = argparse.ArgumentParser(description="This tools is use to scrap article from a given link")
-    parser.add_argument('url', type=str, help='url of the article you want to scrap')
-    parser.add_argument('lang', type=str, help='article language, [Bahasa, English], default: `Bahasa`', default='Bahasa')
-    args = parser.parse_args()
-    
-    ########################################### END ARGUMENTS ##############################################
-
-    text = Scrap(args.url, args.lang)
-
-    if text:
-        print(text)

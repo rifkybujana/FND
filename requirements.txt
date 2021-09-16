@@ -1,12 +1,5 @@
 numpy==1.18.5
-joblib==0.16.0
-tensorflow-cpu==2.3.1
-Keras==2.4.3
-nltk==3.5
-requests==2.24.0
 streamlit==0.77.0
-beautifulsoup4==4.9.3
-Sastrawi==1.0.1
-html5lib==1.1
-matplotlib==3.2.2
 newspaper3k==0.2.8
+transformers==4.10.2
+torch==1.9.0

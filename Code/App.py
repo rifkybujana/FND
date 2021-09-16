@@ -1,48 +1,47 @@
 import streamlit as st
-import Predict
+import re
 
-from Preprocess import *
+from transformers import AutoModelForSequenceClassification, AutoTokenizer, Trainer
 from Scraper import Scrap
 
-"""
-This is a webapp to show the model prediction with GUI
-to run this, you can easily run the following command:
 
-streamlit run App.py
-"""
+model_checkpoint = "Rifky/IndoBERT-FakeNews"
 
-st.write('Fake News Detection AI')
-
-user_input  = st.text_area("Put article url or the full text")
-button      = st.button("enter")
-language    = st.sidebar.selectbox("Language", ['Bahasa', 'English'])
 
 @st.cache(show_spinner=False, allow_output_mutation=True)
 def load_model():
-    return Predict.LoadModel(Predict.relative_path + language.lower())
+    model = AutoModelForSequenceClassification.from_pretrained(model_checkpoint, num_labels=2)
+    tokenizer = AutoTokenizer.from_pretrained(model_checkpoint, fast=True)
+    return Trainer(model=model), tokenizer
 
-if button:
+
+st.write('# Fake News Detection AI')
+
+with st.spinner("Loading Model..."):
+    model, tokenizer = load_model()
+
+user_input = st.text_area("Put article url or the full text", help="the text you want to analyze", height=200)
+submit = st.button("submit")
+
+if submit:
     text = ""
 
-    with st.spinner("reading article..."):
+    with st.spinner("Reading Article..."):
         if user_input:
             if user_input[:4] == 'http':
-                text = Scrap(args.url, args.lang)
+                text = Scrap(user_input)
             else:
                 text = user_input
 
     if text:
-        with st.spinner("Loading Model..."):
-            model = load_model()
+        user_input = re.sub(r'\n', ' ', user_input)
 
-        preprocess = GetObject(language)
+        with st.spinner("Computing..."):
+            user_input = tokenizer(user_input, max_length=512, truncation=True)
+            result = model.predict([user_input])[0][0]
+            print (f'\nresult: {result}')
 
-        with st.spinner("Predicting..."):
-            prediction = Predict.Predict(model, preprocess, text)
-
-        if prediction >= 0.5:
-            activation = round((prediction - 0.5) * 200)
-            st.write("Fake [{}%]".format(activation))
-        else:
-            activation = round((0.5 - prediction) * 200)
-            st.write("Valid [{}%]".format(activation))
+            if (result[0] >= result[1]):
+                st.success("Prediction: Valid")
+            else:
+                st.error("Prediction: Hoax")
