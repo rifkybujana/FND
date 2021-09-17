@@ -1,5 +1,6 @@
 import streamlit as st
 import re
+import time
 
 from transformers import AutoModelForSequenceClassification, AutoTokenizer, Trainer
 from Scraper import Scrap
@@ -24,6 +25,8 @@ user_input = st.text_area("Put article url or the full text", help="the text you
 submit = st.button("submit")
 
 if submit:
+    last_time = time.time()
+
     text = ""
 
     with st.spinner("Reading Article..."):
@@ -40,6 +43,8 @@ if submit:
             user_input = tokenizer(user_input, max_length=512, truncation=True)
             result = model.predict([user_input])[0][0]
             print (f'\nresult: {result}')
+
+            st.markdown(f"<small>Compute Finished in {time.time() - last_time} seconds</small>", unsafe_allow_html=True)
 
             if (result[0] >= result[1]):
                 st.success("Prediction: Valid")
