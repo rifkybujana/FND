@@ -1,5 +1,5 @@
-numpy==1.18.5
-streamlit==0.77.0
 newspaper3k==0.2.8
-transformers==4.10.2
-torch==1.9.0
+numpy==1.23.1
+streamlit==1.11.1
+transformers==4.21.0
+torch
