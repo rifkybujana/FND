@@ -15,7 +15,7 @@ st.set_page_config(layout="wide")
 
 model_checkpoint = "Rifky/indobert-hoax-classification"
 base_model_checkpoint = "indobenchmark/indobert-base-p1"
-data_checkpoint = "Rifky/turnbackhoax-encoded"
+data_checkpoint = "Rifky/indonesian-hoax-news"
 label = {0: "valid", 1: "fake"}
 
 @st.cache(show_spinner=False, allow_output_mutation=True)
@@ -42,7 +42,8 @@ submit = input_column.button("submit")
 if submit:
     last_time = time.time()
     with st.spinner("Reading Article..."):
-        title, text = Scrap(user_input)
+        scrap = Scrap(user_input)
+        title, text = scrap.title, scrap.text
 
     if text:
         text = re.sub(r'\n', ' ', text)
@@ -80,8 +81,6 @@ if submit:
             
             for i in sorted[:5]:
                 reference_column.write(f"""
-                <small>turnbackhoax.id</small>
+                <small>{data["url"][i].split("/")[2]}</small>
                 <a href={data["url"][i]}><h5>{data["title"][i]}</h5></a>
                 """, unsafe_allow_html=True)
-                with reference_column.expander("read content"):
-                    st.write(data["text"][i])
