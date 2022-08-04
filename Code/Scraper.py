@@ -1,12 +1,5 @@
 from newspaper import Article
 
-"""
-This script can be used to scrap article from a given link
-
-Author: Rifky Bujana Bisri
-email : rifkybujanabisri@gmail.com
-"""
-
 def Scrap(url):
     """
     Scrap article from url
@@ -27,4 +20,4 @@ def Scrap(url):
         print("Can't Scrap this article link")
         return None
 
-    return article.text
+    return article
