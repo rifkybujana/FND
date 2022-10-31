@@ -11,8 +11,6 @@ from datasets import load_dataset
 from sentence_transformers import SentenceTransformer
 from Scraper import Scrap
 
-st.set_page_config(layout="wide")
-
 model_checkpoint = "Rifky/indobert-hoax-classification"
 base_model_checkpoint = "indobenchmark/indobert-base-p1"
 data_checkpoint = "Rifky/indonesian-hoax-news"
@@ -23,29 +21,36 @@ def load_model():
     model = AutoModelForSequenceClassification.from_pretrained(model_checkpoint, num_labels=2)
     base_model = SentenceTransformer(base_model_checkpoint)
     tokenizer = AutoTokenizer.from_pretrained(model_checkpoint, fast=True)
-    data = load_dataset(data_checkpoint, split="train")
+    data = load_dataset(data_checkpoint, split="train", download_mode='force_redownload')
     return model, base_model, tokenizer, data
 
 def sigmoid(x):
     return 1 / (1 + np.exp(-x))
 
-input_column, reference_column = st.columns(2)
-input_column.write('# Fake News Detection AI')
-
 with st.spinner("Loading Model..."):
     model, base_model, tokenizer, data = load_model()
 
-user_input = input_column.text_input("Article url")
-submit = input_column.button("submit")
+st.markdown("""<h1 style="text-align:center;">Fake News Detection AI</h1>""", unsafe_allow_html=True)
+user_input = st.text_input("Article URL")
 
+m = st.markdown("""
+<style>
+div.stButton > button:first-child {
+    margin: auto;
+    display: block;
+    width: 100%;
+}
+</style>""", unsafe_allow_html=True)
+
+submit = st.button("submit")
 
 if submit:
     last_time = time.time()
     with st.spinner("Reading Article..."):
         scrap = Scrap(user_input)
-        title, text = scrap.title, scrap.text
 
-    if text:
+    if scrap:
+        title, text = scrap.title, scrap.text
         text = re.sub(r'\n', ' ', text)
 
         with st.spinner("Computing..."):
@@ -72,15 +77,44 @@ if submit:
                 data["embeddings"]
             ).flatten()
             sorted = np.argsort(similarity_score)[::-1].tolist()
-            
-            input_column.markdown(f"<small>Compute Finished in {int(time.time() - last_time)} seconds</small>", unsafe_allow_html=True)
+
             prediction = np.argmax(result, axis=-1)
-            input_column.success(f"This news is {label[prediction]}.")
-            input_column.text(f"{int(result[prediction]*100)}% confidence")
-            input_column.progress(result[prediction])
+            if prediction == 0:
+                st.markdown(f"""<p style="background-color: rgb(236, 253, 245); 
+                color: rgb(6, 95, 70);
+                font-size: 20px;
+                border-radius: 7px;
+                padding-left: 12px;
+                padding-top: 15px;
+                padding-bottom: 15px;
+                line-height: 25px;
+                text-align: center;">This article is <b>{label[prediction]}</b>.</p>""", unsafe_allow_html=True)
+            else:
+                st.markdown(f"""<p style="background-color: rgb(254, 242, 242); 
+                color: rgb(153, 27, 27);
+                font-size: 20px;
+                border-radius: 7px;
+                padding-left: 12px;
+                padding-top: 15px;
+                padding-bottom: 15px;
+                line-height: 25px;
+                text-align: center;">This article is <b>{label[prediction]}</b>.</p>""", unsafe_allow_html=True)
+                
             
-            for i in sorted[:5]:
-                reference_column.write(f"""
-                <small>{data["url"][i].split("/")[2]}</small>
-                <a href={data["url"][i]}><h5>{data["title"][i]}</h5></a>
-                """, unsafe_allow_html=True)
+            with st.expander("Related Articles"):
+                for i in sorted[:5]:
+                    # st.write(f"""""",unsafe_allow_html=True)
+                    st.markdown(f"""
+                    <small style="text-align: left;">{data["url"][i].split("/")[2]}</small><br>
+                    <a href={data["url"][i]} style="text-align: left;">{data["title"][i]}</a>
+                    """, unsafe_allow_html=True)
+    else:
+        st.markdown(f"""<p style="background-color: rgb(254, 242, 242); 
+        color: rgb(153, 27, 27);
+        font-size: 20px;
+        border-radius: 7px;
+        padding-left: 12px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        line-height: 25px;
+        text-align: center;">Can't scrap article from this link.</p>""", unsafe_allow_html=True)
