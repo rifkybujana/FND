@@ -159,7 +159,7 @@ Special Thanks to Intel, Orbit Future Academy and Indonesian Ministry of Educati
 [stars-url]: https://github.com/rifkybujana/FND/stargazers
 [issues-shield]: https://img.shields.io/github/issues/rifkybujana/FND.svg?style=for-the-badge
 [issues-url]: https://github.com/rifkybujana/FND/issues
-[license-shield]: https://img.shields.io/badge/License-GNU-yellow.svg?style=for-the-badge
+[license-shield]: https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge
 [license-url]: ./LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/rifkybujana
